@@ -231,7 +231,7 @@ namespace Kentor.AuthServices.Tests.Owin
             var requestId = AuthnRequestHelper.GetRequestId(new Uri(context.Response.Headers["Location"]));
 
             StoredRequestState storedAuthnData;
-            PendingAuthnRequests.TryRemove(new Saml2Id(requestId), out storedAuthnData);
+            middleware.Options.SPOptions.PendingAuthnRequests.TryRemove(new Saml2Id(requestId), out storedAuthnData);
 
             storedAuthnData.ReturnUrl.Should().Be(returnUrl);
         }
@@ -259,7 +259,7 @@ namespace Kentor.AuthServices.Tests.Owin
             var requestId = AuthnRequestHelper.GetRequestId(new Uri(context.Response.Headers["Location"]));
 
             StoredRequestState storedAuthnData;
-            PendingAuthnRequests.TryRemove(new Saml2Id(requestId), out storedAuthnData);
+			middleware.Options.SPOptions.PendingAuthnRequests.TryRemove(new Saml2Id(requestId), out storedAuthnData);
 
             ((AuthenticationProperties)storedAuthnData.RelayData).Dictionary["test"].Should().Be("SomeValue");
         }
@@ -338,7 +338,7 @@ namespace Kentor.AuthServices.Tests.Owin
             ((AuthenticationProperties)state.RelayData).RedirectUri = state.ReturnUrl.OriginalString;
             ((AuthenticationProperties)state.RelayData).Dictionary["Test"] = "TestValue";
 
-            PendingAuthnRequests.Add(new Saml2Id("KentorAuthServicesAuthenticationMiddleware_AcsWorksRequestID"), state);
+			StubFactory.PendingAuthnRequests.Add(new Saml2Id("KentorAuthServicesAuthenticationMiddleware_AcsWorksRequestID"), state);
 
             var response =
             @"<saml2p:Response xmlns:saml2p=""urn:oasis:names:tc:SAML:2.0:protocol""
@@ -442,7 +442,7 @@ namespace Kentor.AuthServices.Tests.Owin
             var requestId = AuthnRequestHelper.GetRequestId(new Uri(context.Response.Headers["Location"]));
 
             StoredRequestState storedAuthnData;
-            PendingAuthnRequests.TryRemove(new Saml2Id(requestId), out storedAuthnData);
+			middleware.Options.SPOptions.PendingAuthnRequests.TryRemove(new Saml2Id(requestId), out storedAuthnData);
 
             storedAuthnData.ReturnUrl.Should().Be("http://localhost/Home");
         }

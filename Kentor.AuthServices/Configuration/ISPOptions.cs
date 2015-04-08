@@ -69,5 +69,7 @@ namespace Kentor.AuthServices.Configuration
         /// The System.IdentityModel configuration to use.
         /// </summary>
         IdentityConfiguration SystemIdentityModelIdentityConfiguration { get; }
+
+		IPendingAuthnRequests PendingAuthnRequests { get; }
     }
 }

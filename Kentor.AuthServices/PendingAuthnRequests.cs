@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Kentor.AuthServices.Internal
 {
-    static class PendingAuthnRequests
-    {
+	internal class PendingAuthnRequests : IPendingAuthnRequests
+	{
         private static readonly Dictionary<Saml2Id, StoredRequestState> pendingAuthnRequest = new Dictionary<Saml2Id, StoredRequestState>();
 
-        internal static void Add(Saml2Id id, StoredRequestState idp)
+		public void Add(Saml2Id id, StoredRequestState idp)
         {
             lock (pendingAuthnRequest)
             {
@@ -23,7 +23,7 @@ namespace Kentor.AuthServices.Internal
             }
         }
 
-        internal static bool TryRemove(Saml2Id id, out StoredRequestState idp)
+		public bool TryRemove(Saml2Id id, out StoredRequestState idp)
         {
             lock (pendingAuthnRequest)
             {

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Kentor.AuthServices.Internal;
 
 namespace Kentor.AuthServices.Tests
 {
@@ -19,6 +20,8 @@ namespace Kentor.AuthServices.Tests
         {
             return new AuthServicesUrls(new Uri("http://localhost"), "/AuthServices");
         }
+
+		internal static IPendingAuthnRequests PendingAuthnRequests = new PendingAuthnRequests();
 
         internal static SPOptions CreateSPOptions()
         {
@@ -30,7 +33,7 @@ namespace Kentor.AuthServices.Tests
                 new Uri("http://github.com/KentorIT/authservices"),
                 CultureInfo.InvariantCulture));
 
-            var options = new SPOptions
+            var options = new SPOptions(PendingAuthnRequests)
             {
                 EntityId = new EntityId("https://github.com/KentorIT/authservices"),
                 MetadataCacheDuration = new TimeSpan(0, 0, 42),
@@ -105,7 +108,7 @@ namespace Kentor.AuthServices.Tests
             return (Options)CreateOptions(sp => new Options(sp));
         }
 
-        internal static KentorAuthServicesAuthenticationOptions CreateOwinOptions()
+	    internal static KentorAuthServicesAuthenticationOptions CreateOwinOptions()
         {
             return (KentorAuthServicesAuthenticationOptions)CreateOptions(
                 sp => new KentorAuthServicesAuthenticationOptions(false)

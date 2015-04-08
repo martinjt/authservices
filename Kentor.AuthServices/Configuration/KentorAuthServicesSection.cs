@@ -300,5 +300,19 @@ namespace Kentor.AuthServices.Configuration
                 return systemIdentityModelIdentityConfiguration;
             }
         }
-    }
+
+
+		private IPendingAuthnRequests pendingAuthnRequests;
+
+		public IPendingAuthnRequests PendingAuthnRequests
+		{
+			get
+			{
+				if (pendingAuthnRequests == null)
+					pendingAuthnRequests = new PendingAuthnRequests();
+
+				return pendingAuthnRequests;
+			}
+		}
+	}
 }

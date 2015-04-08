@@ -55,7 +55,9 @@
     </Compile>
     <Compile Include="Internal\PathHelper.cs" />
     <Compile Include="Internal\QueryStringHelper.cs" />
+    <Compile Include="IPendingAuthnRequests.cs" />
     <Compile Include="Metadata\KeyInfoSerializer.cs" />
+    <Compile Include="PendingAuthnRequests.cs" />
     <Compile Include="Saml2ResponseFailedValidationException.cs" />
     <Compile Include="WebSso\AcsCommand.cs" />
     <Compile Include="Metadata\AttributeConsumingService.cs" />
@@ -107,7 +109,6 @@
     <Compile Include="WebSso\ICommand.cs" />
     <Compile Include="WebSso\CommandFactory.cs" />
     <Compile Include="StoredRequestState.cs" />
-    <Compile Include="Internal\PendingAuthnRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Internal\ReturnRequestedIssuerNameRegistry.cs" />
     <Compile Include="Saml2AssertionExtensions.cs" />

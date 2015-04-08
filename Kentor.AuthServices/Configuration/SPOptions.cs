@@ -8,6 +8,7 @@ using System.IdentityModel.Services.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kentor.AuthServices.Internal;
 
 namespace Kentor.AuthServices.Configuration
 {
@@ -22,8 +23,17 @@ namespace Kentor.AuthServices.Configuration
         /// </summary>
         public SPOptions()
         {
-            MetadataCacheDuration = new TimeSpan(1, 0, 0);
+            MetadataCacheDuration = new TimeSpan(1, 0, 0); 
         }
+
+		/// <summary>
+		/// Ctor
+		/// </summary>
+		/// <param name="_pendingAuthnRequests">Store for Pending Authenication Requests</param>
+	    public SPOptions(IPendingAuthnRequests pendingAuthn) : base()
+	    {
+		    pendingAuthnRequests = pendingAuthn;
+	    }
 
         /// <summary>
         /// Return Uri to redirect the client to, if no return uri was specified
@@ -183,5 +193,18 @@ namespace Kentor.AuthServices.Configuration
                 return systemIdentityModelIdentityConfiguration;
             }
         }
+
+		private IPendingAuthnRequests pendingAuthnRequests;
+
+		public IPendingAuthnRequests PendingAuthnRequests
+		{
+			get
+			{
+				if (pendingAuthnRequests == null)
+					pendingAuthnRequests = new PendingAuthnRequests();
+
+				return pendingAuthnRequests;
+			}
+		}
     }
 }

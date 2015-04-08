@@ -52,6 +52,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleOwinApplication", "Sa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kentor.AuthServices.HttpModule", "Kentor.AuthServices.HttpModule\Kentor.AuthServices.HttpModule.csproj", "{86A588E8-2E2D-4394-9545-24D8EA939CF2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9DEA2A9B-C33E-4356-8B86-EDA75E3213E5}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

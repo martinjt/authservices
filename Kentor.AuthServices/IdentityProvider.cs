@@ -227,7 +227,7 @@ namespace Kentor.AuthServices
 
             var responseData = new StoredRequestState(EntityId, returnUrl, relayData);
 
-            PendingAuthnRequests.Add(new Saml2Id(authnRequest.Id), responseData);
+            spOptions.PendingAuthnRequests.Add(new Saml2Id(authnRequest.Id), responseData);
 
             return authnRequest;
         }

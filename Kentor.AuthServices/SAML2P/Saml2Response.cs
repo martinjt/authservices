@@ -320,7 +320,7 @@ namespace Kentor.AuthServices.Saml2P
             else
             {
                 StoredRequestState storedRequestState;
-                bool knownInResponseToId = PendingAuthnRequests.TryRemove(InResponseTo, out storedRequestState);
+                bool knownInResponseToId = options.SPOptions.PendingAuthnRequests.TryRemove(InResponseTo, out storedRequestState);
                 if (!knownInResponseToId)
                 {
                     string msg = string.Format(CultureInfo.InvariantCulture,
@@ -369,7 +369,8 @@ namespace Kentor.AuthServices.Saml2P
         /// <summary>Checks the signature.</summary>
         /// <param name="signedRootElement">The signed root element.</param>
         /// <param name="idpKey">The assymetric key of the algorithm.</param>
-        private static void CheckSignature(XmlElement signedRootElement, AsymmetricAlgorithm idpKey)
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "idpKey")]
+		private static void CheckSignature(XmlElement signedRootElement, AsymmetricAlgorithm idpKey)
         {
             var xmlDocument = new XmlDocument { PreserveWhitespace = true };
             xmlDocument.LoadXml(signedRootElement.OuterXml);
@@ -412,7 +413,7 @@ namespace Kentor.AuthServices.Saml2P
             }
             try
             {
-                if (!signedXml.CheckSignature(idpKey))
+                if (!signedXml.CheckSignature())
                 {
                     throw new Saml2ResponseFailedValidationException("Signature validation failed on SAML response or contained assertion.");
                 }
